@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 
+import InfoBar from './InfoBar'
+
 import './InfoArea.css'
 
 const PlayArea = ({ isTraining, isPaused }) => {
@@ -25,7 +27,9 @@ const PlayArea = ({ isTraining, isPaused }) => {
 
   return (
     <div className='infoArea'>
-      <h1>InfoArea</h1>
+      <InfoBar label='Rest' info='00:20' />
+      <InfoBar label='Work' info='01:00' />
+      <InfoBar label='Sets' info='7' />
     </div>
 
   )

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@200;300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@500&family=Roboto:wght@300&display=swap');
+
+.infoBar {
+    display: flex;
+    align-items: center;
+}
+
+.incrementButton {
+    height: 90px;
+    width: 90px;
+    border-radius: 90px;
+    border: 0;
+    background: #6B7A99;
+
+    margin-top: 25pt;
+
+    font-style: normal;
+    font-weight: normal;
+    font-size: 40px;
+    line-height: 47px;
+    text-align: center;
+
+    color: #FFFFFF;
+
+    filter: drop-shadow(0px 4px 4px rgba(40, 45, 54, 0.3));
+}
+
+
+.infoContainer{
+   margin-left: 170px;
+   margin-right: 170px;
+   width: 335px;
+}
+
+.label{
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: 300;
+    font-size: 48.5319px;
+   
+    text-align: center;
+
+    color: #6B7A99;
+
+    margin: 0px;
+
+    font-family: Roboto;
+
+    height: 50px;
+}
+
+.info{
+    font-style: normal;
+    font-weight: 400;
+    font-size: 130px;
+    line-height: 162px;
+    text-align: center;
+
+    color: #6B7A99;
+
+    margin: 0;
+    padding: 0;
+
+    height: 148px;
+
+    font-family: Oxanium;
+}

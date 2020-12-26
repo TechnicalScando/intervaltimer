@@ -1,15 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@500&family=Roboto:wght@300&display=swap');
+
+
 .startButton {
     width: 437px;
     height: 138.2px;
     border-radius: 10px;
     border:0;
 
-    font-family: sans-serif;
-    font-style: normal;
-    font-weight: bold;
-    font-size: 40px;
-    line-height: 54px;
-    text-align: center;
+
+    background: #D7DEE4;
 
     filter: drop-shadow(0px 4px 4px rgba(40, 45, 54, 0.3));
 }
@@ -19,7 +18,7 @@
     height: 45px;
     border-radius: 10px;
     border:0;
-    margin-top: 20pt;
+    margin-top: 15pt;
 
     font-family: sans-serif;
     font-style: normal;
@@ -28,11 +27,16 @@
     line-height: 23px;
     text-align: center;
 
+    background: #D7DEE4;
+
     filter: drop-shadow(0px 4px 4px rgba(40, 45, 54, 0.3));
+
+    font-family: Roboto;
+
 }
 
 .buttonBar {
     display: flex;
     flex-direction: column;
-
+    margin-top: 19px;
 }
