@@ -1,39 +1,14 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './App.css'
-
-import Header from './Header'
-import ButtonBar from './ButtonBar'
-import InfoArea from './InfoArea'
+import Setup from './Components/Setup/Setup'
 
 function App () {
-  const [isTraining, setIsTraining] = useState(false)
-  const [isPaused, setIsPaused] = useState(false)
-
-  const startEvent = () => {
-    // TODO
-  }
-
-  const pauseEvent = () => {
-    // TODO
-  }
-
-  const restartEvent = () => {
-    // TODO
-  }
-
   return (
-    <div className='appContainer'>
-      <div className='flexContainer'>
-        <Header />
-        <InfoArea isTraining={isTraining} isPaused={isPaused} />
-        <ButtonBar
-          startEvent={startEvent}
-          pauseEvent={pauseEvent}
-          restartEvent={restartEvent}
-        />
-      </div>
-    </div>
+    <Router>
+      <Route path='/' exact component={Setup} />
+    </Router>
   )
 }
 
