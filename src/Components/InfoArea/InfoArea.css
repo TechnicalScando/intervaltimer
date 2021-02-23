@@ -1,0 +1,17 @@
+.infoArea {
+    margin-top:9px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .activeInfo {
+      display: flex;
+      flex-direction: column;
+      margin-top: 265px;
+  }
+
+  .activeBarContainer {
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 145px;
+  }

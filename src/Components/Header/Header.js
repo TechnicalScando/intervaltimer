@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { ReactComponent as Logo } from './logo.svg'
+import { ReactComponent as Logo } from '../../Images/logo.svg'
 
 import './Header.css'
 
