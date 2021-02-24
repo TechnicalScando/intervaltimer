@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import InfoBar from '../InfoBar/InfoBar'
 import ButtonBar from '../ButtonBar/ButtonBar'
@@ -6,11 +6,16 @@ import ButtonBar from '../ButtonBar/ButtonBar'
 import './InfoArea.css'
 
 const PlayArea = () => {
-  const [workTimer, setWorkTimer] = useState(60)
-  const [restTimer, setRestTimer] = useState(0)
-  const [sets, setSets] = useState(7)
+  const defaultWorkTimer = 5
+  const defaultRestTimer = 3
+  const defaultSets = 7
+
+  const [workTimer, setWorkTimer] = useState(defaultWorkTimer)
+  const [restTimer, setRestTimer] = useState(defaultRestTimer)
+  const [sets, setSets] = useState(defaultSets)
   const [incrementButtonsActive, setIncrementButtonsActive] = useState(true)
-  const [currentTimer, setCurrentTimer] = useState(null)
+  const [currentTimerInterval, setCurrentTimerInterval] = useState(null)
+  const [isWorkTimer, setisWorkTimer] = useState(true)
 
   const startButtonHandler = () => {
     setIncrementButtonsActive(false)
@@ -19,10 +24,10 @@ const PlayArea = () => {
 
   const resetButtonHandler = () => {
     setIncrementButtonsActive(true)
-    setWorkTimer(60)
-    setRestTimer(0)
-    setSets(7)
-    clearInterval(currentTimer)
+    setWorkTimer(defaultWorkTimer)
+    setRestTimer(defaultRestTimer)
+    setSets(defaultSets)
+    clearInterval(currentTimerInterval)
   }
 
   const timerCountdown = (timer, setFunction) => {
@@ -31,21 +36,13 @@ const PlayArea = () => {
       if (countTimer > 0) {
         countTimer--
         setFunction(countTimer)
+        console.log(`${timer} is running`)
       } else {
-        stopTimer(timer)
+        clearInterval(timerInterval)
       }
     }
     , 1000)
-    setCurrentTimer(timerInterval)
-    console.log(currentTimer)
-  }
-
-  const stopTimer = () => {
-    clearInterval(currentTimer)
-  }
-
-  const alternateTimer = () => {
-    // TODO
+    setCurrentTimerInterval(timerInterval)
   }
 
   const incrementSets = () => {
@@ -95,6 +92,24 @@ const PlayArea = () => {
     return returnValue
   }
 
+  useEffect(() => {
+    if (restTimer === 0 && sets > 1) {
+      if (restTimer !== defaultRestTimer) {
+        setRestTimer(defaultRestTimer)
+      }
+      setisWorkTimer(true)
+      timerCountdown(workTimer, setWorkTimer)
+      decrementSets()
+    }
+    if (workTimer === 0 && sets > 0) {
+      if (workTimer !== defaultWorkTimer) {
+        setWorkTimer(defaultWorkTimer)
+      }
+      setisWorkTimer(false)
+      timerCountdown(restTimer, setRestTimer)
+    }
+  }, [restTimer, workTimer, sets, decrementSets])
+
   if (incrementButtonsActive) {
     return (
       <div className='infoArea'>
@@ -128,30 +143,57 @@ const PlayArea = () => {
 
     )
   } else {
-    return (
-      <div className='activeInfo'>
-        <div className='activeBarContainer'>
-          <InfoBar
-            label='Work'
-            info={timerToString(workTimer)}
-            incrementFunction={incrementWorkTimer}
-            decrementFunction={decrementWorkTimer}
-            incrementButtonsActive={incrementButtonsActive}
-          />
-          <InfoBar
-            label='Sets'
-            info={sets}
-            incrementFunction={incrementSets}
-            decrementFunction={decrementSets}
-            incrementButtonsActive={incrementButtonsActive}
+    if (isWorkTimer) {
+      return (
+        <div className='activeInfo'>
+          <div className='activeBarContainer'>
+            <InfoBar
+              label='Work'
+              info={timerToString(workTimer)}
+              incrementFunction={incrementWorkTimer}
+              decrementFunction={decrementWorkTimer}
+              incrementButtonsActive={incrementButtonsActive}
+            />
+            <InfoBar
+              label='Sets'
+              info={sets}
+              incrementFunction={incrementSets}
+              decrementFunction={decrementSets}
+              incrementButtonsActive={incrementButtonsActive}
+            />
+          </div>
+          <ButtonBar
+            startButtonHandler={startButtonHandler}
+            resetButtonHandler={resetButtonHandler}
           />
         </div>
-        <ButtonBar
-          startButtonHandler={startButtonHandler}
-          resetButtonHandler={resetButtonHandler}
-        />
-      </div>
-    )
+      )
+    } else if (!isWorkTimer) {
+      return (
+        <div className='activeInfo'>
+          <div className='activeBarContainer'>
+            <InfoBar
+              label='Rest'
+              info={timerToString(restTimer)}
+              incrementFunction={incrementWorkTimer}
+              decrementFunction={decrementWorkTimer}
+              incrementButtonsActive={incrementButtonsActive}
+            />
+            <InfoBar
+              label='Sets'
+              info={sets}
+              incrementFunction={incrementSets}
+              decrementFunction={decrementSets}
+              incrementButtonsActive={incrementButtonsActive}
+            />
+          </div>
+          <ButtonBar
+            startButtonHandler={startButtonHandler}
+            resetButtonHandler={resetButtonHandler}
+          />
+        </div>
+      )
+    }
   }
 }
 
