@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import InfoBar from '../InfoBar/InfoBar'
 import ButtonBar from '../ButtonBar/ButtonBar'
@@ -10,6 +10,10 @@ const PlayArea = () => {
   const defaultRestTimer = 3
   const defaultSets = 7
 
+  const initialWorkValue = defaultWorkTimer
+  const initialRestValue = defaultRestTimer
+  const initialSetsValue = defaultSets
+
   const [workTimer, setWorkTimer] = useState(defaultWorkTimer)
   const [restTimer, setRestTimer] = useState(defaultRestTimer)
   const [sets, setSets] = useState(defaultSets)
@@ -17,28 +21,59 @@ const PlayArea = () => {
   const [currentTimerInterval, setCurrentTimerInterval] = useState(null)
   const [isWorkTimer, setisWorkTimer] = useState(true)
 
+  let setsCopy = sets
+
+  useState(() => {
+    console.log(`${sets}`)
+  }, [sets])
+
   const startButtonHandler = () => {
     setIncrementButtonsActive(false)
-    timerCountdown(workTimer, setWorkTimer)
+
+    workTimerCountdown()
   }
 
   const resetButtonHandler = () => {
     setIncrementButtonsActive(true)
-    setWorkTimer(defaultWorkTimer)
-    setRestTimer(defaultRestTimer)
-    setSets(defaultSets)
+
     clearInterval(currentTimerInterval)
   }
 
-  const timerCountdown = (timer, setFunction) => {
-    let countTimer = timer
+  const workTimerCountdown = () => {
+    let countTimer = workTimer
     const timerInterval = setInterval(() => {
       if (countTimer > 0) {
         countTimer--
-        setFunction(countTimer)
-        console.log(`${timer} is running`)
+        setWorkTimer(countTimer)
       } else {
         clearInterval(timerInterval)
+        setWorkTimer(initialWorkValue)
+        setisWorkTimer(false)
+        restTimerCountdown()
+      }
+    }
+    , 1000)
+    setCurrentTimerInterval(timerInterval)
+  }
+
+  const restTimerCountdown = () => {
+    let countTimer = restTimer
+
+    const timerInterval = setInterval(() => {
+      if (countTimer > 0) {
+        countTimer--
+        setRestTimer(countTimer)
+      } else {
+        clearInterval(timerInterval)
+        if (setsCopy > 1) {
+          setRestTimer(initialRestValue)
+          setsCopy--
+          setSets(setsCopy)
+          setisWorkTimer(true)
+          workTimerCountdown()
+        } else {
+          console.log('workout finished!')
+        }
       }
     }
     , 1000)
@@ -91,24 +126,6 @@ const PlayArea = () => {
 
     return returnValue
   }
-
-  useEffect(() => {
-    if (restTimer === 0 && sets > 1) {
-      if (restTimer !== defaultRestTimer) {
-        setRestTimer(defaultRestTimer)
-      }
-      setisWorkTimer(true)
-      timerCountdown(workTimer, setWorkTimer)
-      decrementSets()
-    }
-    if (workTimer === 0 && sets > 0) {
-      if (workTimer !== defaultWorkTimer) {
-        setWorkTimer(defaultWorkTimer)
-      }
-      setisWorkTimer(false)
-      timerCountdown(restTimer, setRestTimer)
-    }
-  }, [restTimer, workTimer, sets, decrementSets])
 
   if (incrementButtonsActive) {
     return (
