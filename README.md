@@ -1,70 +1,66 @@
-# Getting Started with Create React App
+# Interval Timer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A simple React-based interval timer for managing customizable workout sessions with alternating work and rest periods.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Adjustable durations for work and rest intervals
+- Set number of total cycles (sets)
+- Countdown timer with automatic switching between work and rest
+- Start and reset controls
+- Clean UI built with React components
 
-### `npm start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Getting Started
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+These instructions will help you set up the project locally.
 
-### `npm test`
+### Prerequisites
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Node.js and npm installed on your machine
 
-### `npm run build`
+### Installation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. Clone the repository:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```bash
+git clone https://github.com/TechnicalScando/intervaltimer.git
+cd intervaltimer
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+2. Install dependencies:
 
-### `npm run eject`
+```bash
+npm install
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+3. Start the development server:
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```bash
+npm start
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+Open [http://localhost:3000](http://localhost:3000) in your browser to view the app.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## File Structure
 
-## Learn More
+- `src/Components/Setup` – Root layout and main container
+- `src/Components/InfoArea` – Core logic for timers and state
+- `src/Components/InfoBar` & `ButtonBar` – Display and control buttons
+- `public/` – Static assets and entry HTML
+- `App.js` – Root component loading the main timer setup
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## How It Works
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. You start with default values (e.g., 5s work, 3s rest, 7 sets).
+2. Press **Start** to begin the timer.
+3. The app counts down work time, then rest time, and repeats for the set count.
+4. Press **Reset** at any time to stop and return to defaults.
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+This project is open source and available under the [MIT License](LICENSE).
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Made with using React.
